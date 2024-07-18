@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@font-face {
-    font-family: "FakeSerif";
-    src: url("../../fonts/fake_serif/Fake\ Serif.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 :root {
-    --font-main: "FakeSerif", Arial, Helvetica, sans-serif;
-    --font-accent: "Inter", Arial, Helvetica, sans-serif;
+    --font-main: "Edu AU VIC WA NT Hand", Arial, Helvetica, sans-serif;
+    --font-accent: "PT Sans", Arial, Helvetica, sans-serif;
     --font-xxs: 0.5rem;
     --font-xs: 0.75rem;
     --font-s: 0.875rem;
@@ -36,7 +35,7 @@ p {
 }
 
 h1 {
-    font-size: clamp(4rem, 3.3333rem + 2.1333vw, 6rem);
+    font-size: clamp(4rem, 3.3333rem + 2.1333vw, 5rem);
     font-weight: 900;
     margin-bottom: var(--space-l);
     color: var(--coul-accent-fonce);
@@ -44,7 +43,7 @@ h1 {
 }
 
 h2 {
-    font-size: clamp(4rem, 3.3333rem + 2.1333vw, 5rem);
+    font-size: clamp(4rem, 3.3333rem + 2.1333vw, 3.5rem);
     font-weight: 700;
     color: var(--coul-accent-moyen);
 }
@@ -77,7 +76,7 @@ hr {
     margin-bottom: var(--space-l);
 }
 
-a {
+a, button {
     font-family: var(--font-accent);
     color: var(--coul-principale-fonce);
     font-weight: 700;
@@ -86,4 +85,10 @@ a {
     &:hover {
         color: var(--coul-accent-fonce);
     }
+}
+
+button {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--font-m);
 }

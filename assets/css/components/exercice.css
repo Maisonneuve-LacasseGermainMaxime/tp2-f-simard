@@ -31,10 +31,10 @@
 [data-exercice-infos] h3 {
     color: var(--coul-principale-moyen-bleu);
     font-weight: 700;
-    font-size: var(--font-xl);
+    font-size: var(--font-l);
 }
 
 [data-exercice-infos] p {
     color: var(--coul-principale-moyen-bleu);
-    font-size: var(--font-l);
+    font-size: var(--font-m);
 }
