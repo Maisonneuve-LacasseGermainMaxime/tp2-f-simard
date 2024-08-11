@@ -58,21 +58,40 @@
                     <div class="input-group">
                         <label for="type">Type</label>
                         <input type="text" name="type" id="type" required />
+						<p class="invisible">Ce champs est requis. Veuillez entrer un type valide</p>
                     </div>
 
                     <div class="input-group">
                         <label for="date">Date</label>
                         <input type="datetime-local" name="date" id="date" required />
+						<p class="invisible">Ce champ est requis. Veuillez entrer une date valide</p>
                     </div>
 
                     <div class="input-group">
                         <label for="duree">Durée</label>
                         <input type="number" min="0" name="duree" id="duree" required />
+						<p class="invisible">Ce champ est requis. Veuillez entrer une durée en minute valide</p>
                     </div>
 
                     <div class="input-group">
                         <label for="description">Description</label>
                         <textarea name="description" id="description" required></textarea>
+						<p class="invisible">Ce champ est requis. Veuillez-entrez une description valide.</p>
+                    </div>
+
+                    <div class="input-group">
+                    	<label for="dfficulte">Difficulte</label>
+                       <input type="radio" id="1" name="difficulte" value="1">
+					   <label for="1">1</label>
+                       <input type="radio" id="2" name="difficulte" value="2">
+					   <label for="2">2</label>
+                       <input type="radio" id="3" name="difficulte" value="3" checked>
+					   <label for="3">3</label>
+                       <input type="radio" id="4" name="difficulte" value="4">
+					   <label for="4">4</label>
+                       <input type="radio" id="5" name="difficulte" value="5">
+					   <label for="5">5</label>
+					   <p class="invisible">{{empty}}</p>
                     </div>
 
                     <input class="disabled" type="submit" name="submit" id="submit" value="envoyer" required />

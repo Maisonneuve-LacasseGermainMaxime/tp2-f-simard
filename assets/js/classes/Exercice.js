@@ -16,7 +16,7 @@ class Exercice {
 
 		// mettre la première lettre en majuscule
 		// src: https://www.shecodes.io/athena/3710-how-to-capitalize-the-first-letter-in-a-string-with-javascript
-        this.#type = type.charAt(0).toUpperCase() + type.slice(1);;
+        this.#type = type.charAt(0).toUpperCase() + type.slice(1);
 
         this.#date = date;
 		this.#duree = duree;

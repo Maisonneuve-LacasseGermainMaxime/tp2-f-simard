@@ -1,4 +1,5 @@
 import Exercice from "./Exercice.js";
+import Formulaire from "./Formulaire.js";
 
 class App {
     static #instance;
@@ -25,6 +26,8 @@ class App {
 		this.#listeExerciceHTML = document.querySelector("[data-liste-exercices]");
 		this.#detailsExerciceHTML
 		= document.querySelector("[data-exercice-infos]");
+
+		this.#formulaire = new Formulaire();
 
 		/*FIXME: TEST - A RETIRER*/
 		this.afficherListe();
@@ -74,7 +77,6 @@ class App {
 
     //afficher toutes les tâches
     afficherListe(){
-		console.log('afficher liste');
 		this.#recupererTout();
     }
 
