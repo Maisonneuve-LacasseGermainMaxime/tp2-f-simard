@@ -22,12 +22,12 @@ try {//Afficher les erreurs
             ":id" => $id
         )
     );
-    $taches = $query->fetchAll(PDO::FETCH_ASSOC);
+    $exercecices = $query->fetchAll(PDO::FETCH_ASSOC);
 
     //Retourne la réponse
     header("Content-Type: application/json");
     http_response_code(200);
-    echo json_encode($taches);
+    echo json_encode($exercecices);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["message" => $e->getMessage()]);

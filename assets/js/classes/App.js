@@ -4,6 +4,7 @@ class App {
     static #instance;
 	#exercices;
     #listeExerciceHTML;
+	#detailsExerciceHTML;
     #formulaire;
     #router;
 
@@ -22,9 +23,13 @@ class App {
         }
 
 		this.#listeExerciceHTML = document.querySelector("[data-liste-exercices]");
+		this.#detailsExerciceHTML
+		= document.querySelector("[data-exercice-infos]");
 
-		/*TEST*/
+		/*FIXME: TEST - A RETIRER*/
 		this.afficherListe();
+		this.afficherDetail(1);
+		
     }
 
     //récupérer toutes les tâches
@@ -42,7 +47,18 @@ class App {
     }
 
     //récupérer une tâche selon son ID
-    #recupereUn(id){
+    async #recupereUn(id){
+		const reponse = await fetch(`http://localhost:8080/tp2-f-simard/backend/exercice/lireUn.php?id=${id}`);
+        const exercice = await reponse.json();
+
+		const exerciceInfos = exercice[0];
+		const {idExercice, type, duree, description, date, difficulte} = exerciceInfos;
+		
+		this.#detailsExerciceHTML.querySelector("[data-type]"). textContent = type.charAt(0).toUpperCase() + type.slice(1);
+		this.#detailsExerciceHTML.querySelector("[data-duree]"). textContent = duree;
+		this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;
+		this.#detailsExerciceHTML.querySelector("[data-description]"). textContent = description;
+		this.#detailsExerciceHTML.querySelector("[data-difficulte]"). textContent = difficulte;
 
     }
 
@@ -63,8 +79,8 @@ class App {
     }
 
     //afficher la section de détails de tâche
-    afficherDetail(){
-
+    afficherDetail(id){
+		this.#recupereUn(id);
     }
 
     //afficher la section formulaire

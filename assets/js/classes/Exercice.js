@@ -18,11 +18,7 @@ class Exercice {
 		// src: https://www.shecodes.io/athena/3710-how-to-capitalize-the-first-letter-in-a-string-with-javascript
         this.#type = type.charAt(0).toUpperCase() + type.slice(1);;
 
-		// garder seulement la portion de date de l'horodage
-		const timestampParts = date.split(" ");
-		const dateYMD = timestampParts[0]; 
-        this.#date = dateYMD;
-
+        this.#date = date;
 		this.#duree = duree;
         this.#description = description;
         this.#difficulte = difficulte;
