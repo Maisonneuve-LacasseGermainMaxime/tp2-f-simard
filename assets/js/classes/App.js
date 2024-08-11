@@ -1,6 +1,9 @@
+import Exercice from "./Exercice.js";
+
 class App {
     static #instance;
-    #listeExercice;
+	#exercices;
+    #listeExerciceHTML;
     #formulaire;
     #router;
 
@@ -17,11 +20,25 @@ class App {
         } else {
             App.#instance = this;
         }
+
+		this.#listeExerciceHTML = document.querySelector("[data-liste-exercices]");
+
+		/*TEST*/
+		this.afficherListe();
     }
 
     //récupérer toutes les tâches
-    #recupererTout(){
+    async #recupererTout(){
+		const reponse = await fetch("http://localhost:8080/tp2-f-simard/backend/exercice/lireTout.php");
+        const exercices = await reponse.json();
 
+        this.#exercices = [];
+        this.#listeExerciceHTML.innerHTML = "";
+
+        exercices.forEach((exercice) => {
+            this.#exercices.push(exercice);
+            new Exercice(exercice, this.#listeExerciceHTML);
+        });
     }
 
     //récupérer une tâche selon son ID
@@ -41,7 +58,8 @@ class App {
 
     //afficher toutes les tâches
     afficherListe(){
-
+		console.log('afficher liste');
+		this.#recupererTout();
     }
 
     //afficher la section de détails de tâche

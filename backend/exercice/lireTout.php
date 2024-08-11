@@ -16,12 +16,12 @@ try {//Afficher les erreurs
     //Requête à la base de données
     $sql = "SELECT * FROM exercices ORDER BY date";
     $query = $pdoConnexion->query($sql);
-    $taches = $query->fetchAll(PDO::FETCH_ASSOC);
+    $exercices = $query->fetchAll(PDO::FETCH_ASSOC);
 
     //Retourne la réponse
     header("Content-Type: application/json");
     http_response_code(200);
-    echo json_encode($taches);
+    echo json_encode($exercices);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["message" => $e->getMessage()]);
