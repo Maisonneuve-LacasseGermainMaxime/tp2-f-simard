@@ -6,6 +6,7 @@ class App {
 	#exercices;
     #listeExerciceHTML;
 	#detailsExerciceHTML;
+    #boutonSupprimer;
     #formulaire;
     #router;
 
@@ -23,21 +24,25 @@ class App {
             App.#instance = this;
         }
 
+        //selection HTML
 		this.#listeExerciceHTML = document.querySelector("[data-liste-exercices]");
-		this.#detailsExerciceHTML
-		= document.querySelector("[data-exercice-infos]");
+		this.#detailsExerciceHTML = document.querySelector("[data-exercice-infos]");
+        this.#boutonSupprimer = this.#detailsExerciceHTML.querySelector("[data-action='supprimer']");
 
 		this.#formulaire = new Formulaire();
 
+        //écouteur d'évènement
+        this.#boutonSupprimer.addEventListener("click", this.#supprimer.bind(this));
+
 		/*FIXME: TEST - A RETIRER*/
 		this.afficherListe();
-		this.afficherDetail(1);
+		this.afficherDetail(4);
 		
     }
 
     //récupérer toutes les tâches
     async #recupererTout(){
-		const reponse = await fetch("http://localhost:8080/tp2-f-simard/backend/exercice/lireTout.php");
+		const reponse = await fetch("http://js-tp2:8080/backend/exercice/lireTout.php");
         const exercices = await reponse.json();
 
         this.#exercices = [];
@@ -51,7 +56,7 @@ class App {
 
     //récupérer une tâche selon son ID
     async #recupereUn(id){
-		const reponse = await fetch(`http://localhost:8080/tp2-f-simard/backend/exercice/lireUn.php?id=${id}`);
+		const reponse = await fetch(`http://js-tp2:8080/backend/exercice/lireUn.php?id=${id}`);
         const exercice = await reponse.json();
 
 		const exerciceInfos = exercice[0];
@@ -62,6 +67,7 @@ class App {
 		this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;
 		this.#detailsExerciceHTML.querySelector("[data-description]"). textContent = description;
 		this.#detailsExerciceHTML.querySelector("[data-difficulte]"). textContent = difficulte;
+        this.#detailsExerciceHTML.id = id;
 
     }
 
@@ -71,8 +77,15 @@ class App {
     }
 
     //supprimer un exercice par son id
-    #supprimer(id){
+    async #supprimer(evenement){
+        const idExercice = evenement.target.closest("[data-exercice-infos]").id;
 
+        const reponse = await fetch(`http://js-tp2:8080/backend/exercice/supprimerUn.php?id=${idExercice}`);
+        const tache = await reponse.json();
+
+        //TODO: redirection
+        this.recupererToutesLesTaches();
+        //TODO: popup
     }
 
     //afficher toutes les tâches

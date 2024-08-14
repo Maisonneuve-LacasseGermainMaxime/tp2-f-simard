@@ -37,7 +37,7 @@ class Formulaire {
 				body: JSON.stringify(body)
 			}
 
-			const reponse = await fetch("http://localhost:8080/tp2-f-simard/backend/exercice/ajouterUn.php", config);
+			const reponse = await fetch("http://js-tp2:8080/backend/exercice/ajouterUn.php", config);
 
 			const message = await reponse.json();
 			console.log(message);
