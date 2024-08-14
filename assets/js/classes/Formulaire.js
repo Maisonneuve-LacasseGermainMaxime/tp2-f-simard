@@ -46,7 +46,7 @@ class Formulaire {
 			this.#viderFormulaire();
 
 			// TODO: routeur, redirection
-
+			
 		}
 
     }

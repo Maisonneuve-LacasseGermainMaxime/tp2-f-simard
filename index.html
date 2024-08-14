@@ -22,8 +22,8 @@
         <header>
             <h1>Suivi d'exercices</h1>
             <nav>
-                <a href="#afficher">Afficher les exercices</a>
-                <a href="#ajouter">Ajouter un nouvel exercice</a>
+                <a href="/afficher" data-lien>Afficher les exercices</a>
+                <a href="/ajouter" data-lien>Ajouter un nouvel exercice</a>
             </nav>
         </header>
         <main data-app>
@@ -33,7 +33,7 @@
                     <div class="exercice">
                         <h2 data-exercice-date>{{date}}</h2>
                         <p data-exercice-type>{{type}}</p>
-                        <a href="#detail/{{id}}" class="btn">Détail</a>
+                        <a href="/detail/{{id}}" class="btn" data-lien>Détail</a>
                     </div>
                 </template>
                 <div data-liste-exercices></div>
@@ -47,7 +47,7 @@
                     <p>Date: <span data-date>{{ date }}</span></p>
                     <p>Description: <span data-description>{{ description }}</span></p>
                     <p>Difficulté: <span data-difficulte>{{ difficulte }}</span></p>
-                    <a href="/#afficher" style="margin-right: 10px">Retour à la liste</a>
+                    <a href="/afficher" style="margin-right: 10px" data-lien>Retour à la liste</a>
                     <button class="btn danger" data-action="supprimer">Supprimer l'exercice</button>
                 </div>
             </section>

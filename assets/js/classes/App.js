@@ -1,5 +1,6 @@
 import Exercice from "./Exercice.js";
 import Formulaire from "./Formulaire.js";
+import Router from "./Router.js";
 
 class App {
     static #instance;
@@ -7,6 +8,9 @@ class App {
     #listeExerciceHTML;
 	#detailsExerciceHTML;
     #boutonSupprimer;
+    #panneauListe;
+    #panneauDetail;
+    #panneauFormulaire;
     #formulaire;
     #router;
 
@@ -28,15 +32,17 @@ class App {
 		this.#listeExerciceHTML = document.querySelector("[data-liste-exercices]");
 		this.#detailsExerciceHTML = document.querySelector("[data-exercice-infos]");
         this.#boutonSupprimer = this.#detailsExerciceHTML.querySelector("[data-action='supprimer']");
+        this.#panneauListe = document.querySelector("[data-panneau='liste']");
+        this.#panneauDetail = document.querySelector("[data-panneau='detail']");
+        this.#panneauFormulaire = document.querySelector("[data-panneau='formulaire']");
 
 		this.#formulaire = new Formulaire();
+        this.#router = new Router();
 
         //écouteur d'évènement
         this.#boutonSupprimer.addEventListener("click", this.#supprimer.bind(this));
 
-		/*FIXME: TEST - A RETIRER*/
-		this.afficherListe();
-		this.afficherDetail(4);
+		//appel de fonction au chargement de la page
 		
     }
 
@@ -55,19 +61,21 @@ class App {
     }
 
     //récupérer une tâche selon son ID
-    async #recupereUn(id){
-		const reponse = await fetch(`http://js-tp2:8080/backend/exercice/lireUn.php?id=${id}`);
+    async #recupereUn(idExercice){
+		const reponse = await fetch(`http://js-tp2:8080/backend/exercice/lireUn.php?id=${idExercice}`);
         const exercice = await reponse.json();
 
 		const exerciceInfos = exercice[0];
-		const {idExercice, type, duree, description, date, difficulte} = exerciceInfos;
+
+        console.log(exerciceInfos);
+		const {id, type, duree, description, date, difficulte} = exerciceInfos;
 		
 		this.#detailsExerciceHTML.querySelector("[data-type]"). textContent = type.charAt(0).toUpperCase() + type.slice(1);
 		this.#detailsExerciceHTML.querySelector("[data-duree]"). textContent = duree;
 		this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;
 		this.#detailsExerciceHTML.querySelector("[data-description]"). textContent = description;
 		this.#detailsExerciceHTML.querySelector("[data-difficulte]"). textContent = difficulte;
-        this.#detailsExerciceHTML.id = id;
+        this.#detailsExerciceHTML.id = idExercice;
 
     }
 
@@ -88,18 +96,34 @@ class App {
         //TODO: popup
     }
 
+    #cacherPanneau(){
+        this.#panneauDetail.classList.add("invisible");
+        this.#panneauListe.classList.add("invisible");
+        this.#panneauFormulaire.classList.add("invisible");
+
+    }
+
     //afficher toutes les tâches
     afficherListe(){
 		this.#recupererTout();
+
+        this.#cacherPanneau();
+        this.#panneauListe.classList.remove("invisible");
     }
 
     //afficher la section de détails de tâche
     afficherDetail(id){
 		this.#recupereUn(id);
+
+        this.#cacherPanneau();
+        this.#panneauDetail.classList.remove("invisible");
+
     }
 
     //afficher la section formulaire
     afficherFormulaire(){
+        this.#cacherPanneau();
+        this.#panneauFormulaire.classList.remove("invisible");
 
     }
 }

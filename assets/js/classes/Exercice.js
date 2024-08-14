@@ -37,6 +37,7 @@ class Exercice {
 
 		this.#elementHTML.innerHTML = this.#elementHTML.innerHTML.replace(/{{date}}/g, this.#date);
 		this.#elementHTML.innerHTML = this.#elementHTML.innerHTML.replace(/{{type}}/g, this.#type);
+		this.#elementHTML.innerHTML = this.#elementHTML.innerHTML.replace(/{{id}}/g, this.#id);
     }
 }
 
