@@ -1,9 +1,18 @@
 import App from "./App.js";
 
 class Router {
+    static #instance;
     #routes;
 
     constructor(){
+
+        //singleton
+        if (Router.#instance) {
+            return Router.#instance;
+        } else {
+            Router.#instance = this;
+        }
+
         this.#routes = {
             afficher: App.instance.afficherListe.bind(App.instance),
             ajouter: App.instance.afficherFormulaire.bind(App.instance),
@@ -14,6 +23,11 @@ class Router {
         document.addEventListener("click", this.onClicLien.bind(this));
 
         this.#miseAJourURL();
+    }
+
+    //Permet d'accéder à l'instance de la classe de n'importe où dans le code en utilisant App.instance
+    static get instance() {
+        return Router.#instance;
     }
 
     //mise à jour de la page selon 
@@ -46,6 +60,10 @@ class Router {
 
             this.#miseAJourURL();
         }
+    }
+
+    redirection(){
+        this.#miseAJourURL();
     }
 }
 

@@ -1,3 +1,7 @@
+import ToastModale from "../components/ToastModale";
+import Router from "./Router.js";
+
+
 class Formulaire {
     #formulaireHTML;
     #champsHTML;
@@ -12,6 +16,7 @@ class Formulaire {
 				champ.addEventListener("change", this.#onChangementChamp.bind(this))
 			}.bind(this)
 		);
+
     }
 
     //soumettre la requete HTTP
@@ -37,16 +42,32 @@ class Formulaire {
 				body: JSON.stringify(body)
 			}
 
-			const reponse = await fetch("http://js-tp2:8080/backend/exercice/ajouterUn.php", config);
+			try{
 
-			const message = await reponse.json();
-			console.log(message);
+				const reponse = await fetch("http://js-tp2:8080/backend/exercice/ajouterUn.php", config);
+				const message = await reponse.json();
 
-			//vider formulaire 
-			this.#viderFormulaire();
-
-			// TODO: routeur, redirection
+				if(reponse.ok == false) {
+					throw new Error (message.message);
+				} else {
+					//vider formulaire 
+					this.#viderFormulaire();
 			
+					//afficher message de succes
+					new ToastModale(message.message);
+
+					setTimeout(() => {
+						history.pushState({}, "", "/afficher");
+							Router.instance.redirection();
+					}, 2400);
+
+				}
+	
+			} catch(error){
+				new ToastModale("Une erreur est survenue");
+				console.error(error.message);
+			}
+		
 		}
 
     }
@@ -72,6 +93,8 @@ class Formulaire {
 			}
 		}
 
+		//TODO: validation champ date
+
 		if (estValide) {
 			messageErreur.classList.add("invisible");
 			return true;
@@ -89,24 +112,15 @@ class Formulaire {
     //valider le formulaire au complet
     #validerFormulaire(){
 
-		let validateChamp = [];
-		this.#champsHTML.forEach(function(champ){
-			validateChamp.push(this.#validerChamp(champ));
-		}.bind(this));
+		const estValide = this.#formulaireHTML.checkValidity();
 
-
-		//formulaire valide si ne trouve pas de "false" dans le tableau de validation
-		const estValide = !validateChamp.includes(false);
-
-		if (estValide) {
-			this.#formulaireHTML.querySelector("input[type='submit']").classList.remove("disabled");
-		}
+		this.#formulaireHTML.querySelector("input[type='submit']").classList.toggle("disabled", !estValide);
 		return estValide;
     }
 
     //afficher message de succes de soumission à la base de données
-    #afficherSuccess(){
-
+    #afficherSuccess(message){
+		new ToastModale(message);
     }
 
     //afficher les message d'erreur de soumission à la base de données

@@ -79,11 +79,6 @@ class App {
 
     }
 
-    // ajouter un exercice à la base de donnée
-    #ajouter(infos){
-
-    }
-
     //supprimer un exercice par son id
     async #supprimer(evenement){
         const idExercice = evenement.target.closest("[data-exercice-infos]").id;
@@ -93,7 +88,8 @@ class App {
 
         //TODO: redirection
         this.recupererToutesLesTaches();
-        //TODO: popup
+        
+
     }
 
     #cacherPanneau(){
