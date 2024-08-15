@@ -45,24 +45,23 @@ class Formulaire {
 			try{
 
 				const reponse = await fetch("http://js-tp2:8080/backend/exercice/ajouterUn.php", config);
-				const message = await reponse.json();
 
 				if(reponse.ok == false) {
+					const message = await reponse.json();
 					throw new Error (message.message);
-				} else {
-					//vider formulaire 
-					this.#viderFormulaire();
-			
-					//afficher message de succes
-					new ToastModale(message.message);
+				} 
 
-					setTimeout(() => {
-						history.pushState({}, "", "/afficher");
-							Router.instance.redirection();
-					}, 2400);
+				//vider formulaire 
+				this.#viderFormulaire();
+		
+				//afficher message de succes
+				new ToastModale(message.message);
 
-				}
-	
+				setTimeout(() => {
+					history.pushState({}, "", "/afficher");
+					Router.instance.redirection();
+				}, 2400);
+
 			} catch(error){
 				new ToastModale("Une erreur est survenue");
 				console.error(error.message);

@@ -8,7 +8,7 @@ try {
     $port = "3306";
     $dbname = "fitness-app";
     $username = "root";
-    $password = "";
+    $password = "root";
 
     //Connexion
     $pdoConnexion = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
@@ -30,7 +30,7 @@ try {
     //Retourne la réponse
     header("Content-Type: application/json");
     http_response_code(200);
-    echo json_encode($taches);
+    echo json_encode($message);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["message" => $e->getMessage()]);

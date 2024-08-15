@@ -1,6 +1,7 @@
 import Exercice from "./Exercice.js";
 import Formulaire from "./Formulaire.js";
 import Router from "./Router.js";
+import ToastModale from "../components/ToastModale.js";
 
 class App {
     static #instance;
@@ -84,11 +85,29 @@ class App {
         const idExercice = evenement.target.closest("[data-exercice-infos]").id;
 
         const reponse = await fetch(`http://js-tp2:8080/backend/exercice/supprimerUn.php?id=${idExercice}`);
-        const tache = await reponse.json();
+        console.log(reponse);
 
-        //TODO: redirection
-        this.recupererToutesLesTaches();
-        
+        try{
+            const message = await reponse.json();
+            console.log(message);
+
+            if(reponse.ok === false) {
+                throw new Error (message.message);
+            }
+
+            //afficher message de succes
+            new ToastModale(message.message);
+
+            //redirection
+            history.pushState({}, "", "/afficher");
+            Router.instance.redirection();
+
+        } catch(error) {
+
+            new ToastModale("Une erreur est survenue");
+			console.error(error.message);
+
+        }
 
     }
 
