@@ -39,14 +39,18 @@ class Router {
         let route = parts[0];
         let id = parts[1];
 
+
+
         //dispatch
         const fonctionRoute = this.#routes[route];
-        if (id) {
+        console.log(fonctionRoute);
+        if (id && fonctionRoute) {
             fonctionRoute(id);
         } else if (fonctionRoute) {
             fonctionRoute();
         } else {
-            this.#routes["afficher"]();
+            history.pushState({}, "", "/afficher");
+			Router.instance.redirection();
         }
     }
 

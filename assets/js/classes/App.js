@@ -71,6 +71,7 @@ class App {
         console.log(exerciceInfos);
 		const {id, type, duree, description, date, difficulte} = exerciceInfos;
 		
+        //TODO: rediriger si id n'existe plus
 		this.#detailsExerciceHTML.querySelector("[data-type]"). textContent = type.charAt(0).toUpperCase() + type.slice(1);
 		this.#detailsExerciceHTML.querySelector("[data-duree]"). textContent = duree;
 		this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;

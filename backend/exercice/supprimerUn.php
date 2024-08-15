@@ -8,7 +8,7 @@ try {
     $port = "3306";
     $dbname = "fitness-app";
     $username = "root";
-    $password = "root";
+    $password = "";
 
     //Connexion
     $pdoConnexion = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
