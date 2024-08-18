@@ -43,7 +43,7 @@ class Router {
 
         //dispatch
         const fonctionRoute = this.#routes[route];
-        console.log(fonctionRoute);
+
         if (id && fonctionRoute) {
             fonctionRoute(id);
         } else if (fonctionRoute) {

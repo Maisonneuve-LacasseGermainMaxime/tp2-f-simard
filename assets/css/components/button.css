@@ -13,7 +13,7 @@ button {
     text-align: center;
     margin: 1rem 0;
     font-weight: 900;
-    font-size: var(--font-xxs);
+    font-size: var(--font-s);
     text-transform: uppercase;
 }
 

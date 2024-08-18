@@ -32,8 +32,21 @@ form {
 	flex-direction: column;
 	
 	gap: var(--space-m);
-	
+
 	& .input-group {
+		display: flex;
+		flex-direction: column;
+
+		& > p {
+			margin-top: 0.5rem;
+			padding: 0.5rem;
+			background-color: color-mix(in oklab, tomato 20%, white 80%);
+			color: tomato;
+		}
+
+	}
+	
+	& .input-group > .input {
 		display: flex;
 		width: 100%;
 		gap: var(--space-m);
@@ -71,12 +84,17 @@ input[type="submit"] {
 	}
 }
 
-input:invalid,
-textarea:invalid {
-	border-color: var(--coul-accent-fonce);
-}
-
-input + p {
+/*champ date
+src: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local#technical_summary
+*/
+.input-group > div:has( input:invalid) + p::after{
+	content: "Ce champ est requis. Veuillez entrer une date valide";
+	margin-top: 0.5rem;
+	padding: 0.5rem;
 	background-color: color-mix(in oklab, tomato 20%, white 80%);
 	color: tomato;
+}
+
+.input-group > div:has( input:valid) + p::after{
+	content: "";
 }
