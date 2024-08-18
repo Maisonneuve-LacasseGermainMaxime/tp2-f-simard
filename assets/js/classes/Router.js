@@ -17,6 +17,7 @@ class Router {
             afficher: App.instance.afficherListe.bind(App.instance),
             ajouter: App.instance.afficherFormulaire.bind(App.instance),
             detail: App.instance.afficherDetail.bind(App.instance),
+            erreur: App.instance.afficherPageErreur.bind(App.instance),
         };
 
         window.addEventListener("popstate", this.#miseAJourURL.bind(this));
@@ -49,7 +50,7 @@ class Router {
         } else if (fonctionRoute) {
             fonctionRoute();
         } else {
-            history.pushState({}, "", "/afficher");
+            history.pushState({}, "", "/erreur");
 			Router.instance.redirection();
         }
     }

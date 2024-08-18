@@ -12,6 +12,7 @@ class App {
     #panneauListe;
     #panneauDetail;
     #panneauFormulaire;
+	#panneauErreur;
     #formulaire;
     #router;
 	#msgExerciceSuppprime;
@@ -37,6 +38,7 @@ class App {
         this.#panneauListe = document.querySelector("[data-panneau='liste']");
         this.#panneauDetail = document.querySelector("[data-panneau='detail']");
         this.#panneauFormulaire = document.querySelector("[data-panneau='formulaire']");
+        this.#panneauErreur = document.querySelector("[data-panneau='erreur']");
 
 		this.#formulaire = new Formulaire();
         this.#router = new Router();
@@ -106,10 +108,10 @@ class App {
 
 			//afficher le message selon la cause de l'erreur
 			if (error.cause == "database"){
-				this.#afficherErreur("Une erreur est survenue");
+				this.#afficherToastErreur("Une erreur est survenue");
 				console.warn(error.message);
 			} else {
-				this.#afficherErreur(error.message);
+				this.#afficherToastErreur(error.message);
 			}
 
 			setTimeout(() => {
@@ -156,6 +158,7 @@ class App {
         this.#panneauDetail.classList.add("invisible");
         this.#panneauListe.classList.add("invisible");
         this.#panneauFormulaire.classList.add("invisible");
+        this.#panneauErreur.classList.add("invisible");
 
     }
 
@@ -173,19 +176,24 @@ class App {
 
         this.#cacherPanneau();
         this.#panneauDetail.classList.remove("invisible");
-
     }
 
     //afficher la section formulaire
     afficherFormulaire(){
         this.#cacherPanneau();
         this.#panneauFormulaire.classList.remove("invisible");
-
     }
 
-	#afficherErreur(message) {
+	afficherPageErreur(){
+        this.#cacherPanneau();
+        this.#panneauErreur.classList.remove("invisible");
+	}
+
+	#afficherToastErreur(message) {
 		new ToastModale(message);
 	}
+
+
 }
 
 export default App;
