@@ -55,7 +55,7 @@ class Formulaire {
 				this.#viderFormulaire();
 		
 				//afficher message de succes
-				new ToastModale(message.message);
+				this.#afficherSuccess(message.message);
 
 				setTimeout(() => {
 					history.pushState({}, "", "/afficher");
@@ -63,7 +63,7 @@ class Formulaire {
 				}, 2400);
 
 			} catch(error){
-				new ToastModale("Une erreur est survenue");
+				this.#afficherErreur("Une erreur est survenue");
 				console.error(error.message);
 			}
 		
@@ -123,8 +123,8 @@ class Formulaire {
     }
 
     //afficher les message d'erreur de soumission à la base de données
-    #afficherErreur(){
-
+    #afficherErreur(message){
+		new ToastModale(message);
     }
 
     //vider le formulaire

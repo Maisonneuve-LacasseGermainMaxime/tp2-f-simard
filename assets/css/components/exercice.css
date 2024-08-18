@@ -17,9 +17,15 @@
         color: var(--coul-blanc);
         padding: var(--space-s) var(--space-m);
         border-radius: 5px;
-        border: var(--coul-accent-moyen);
+        border: 2px solid var(--coul-accent-fonce);
         cursor: pointer;
         margin-left: auto;
+
+		&:hover {
+			background-color: var(--coul-blanc);
+			color: var(--coul-accent-fonce);
+			border-color: var(--coul-accent-fonce);
+		}
     }
 }
 

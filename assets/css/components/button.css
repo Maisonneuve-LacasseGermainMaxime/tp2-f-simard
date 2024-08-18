@@ -1,14 +1,14 @@
 .btn,
 button {
     border-radius: 15px;
-    background-color: var(--coul-principale-fonce);
-    color: var(--coul-blanc);
+	background-color: var(--coul-accent-pale);
+	color: var(--coul-noir);
 
     min-width: 10vw;
     width: fit-content;
     padding: 1rem;
     cursor: pointer;
-    border: 2px solid var(--coul-principale-pale-bleu);
+    border: 2px solid var(--coul-accent-pale);
     transition: border 300ms, background-color 300ms;
     text-align: center;
     margin: 1rem 0;
@@ -27,25 +27,25 @@ button {
 }
 
 .btn:hover {
-    background-color: var(--coul-principale-fonce);
-}
-
-.btn:active {
-    background-color: var(--coul-principale-moyen-vert);
-    border-color: var(--coul-blanc);
+    background-color: var(--coul-accent-fonce);
+	border: 2px solid var(--coul-accent-fonce);
+	color: var(--coul-blanc);
 }
 
 .btn.danger {
-    background-color: var(--coul-accent-moyen);
-    border: 2px solid var(--coul-accent-pale);
+    background-color: var(--coul-principale-pale-bleu);
+    border: 2px solid var(--coul-principale-pale-bleu);
+	color: var(--coul-noir);
 }
 
 .btn.danger:hover {
-    background-color: var(--coul-accent-fonce);
+    background-color: var(--coul-blanc);
+    border: 2px solid var(--coul-principale-pale-bleu);
+	color: var(--coul-noir);
 }
 
 .btn.danger:active {
-    background-color: var(--coul-accent-pale);
+    background-color: var(--coul-tomato);
     border-color: var(--coul-blanc);
 }
 

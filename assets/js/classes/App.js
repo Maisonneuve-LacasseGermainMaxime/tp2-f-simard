@@ -14,6 +14,7 @@ class App {
     #panneauFormulaire;
     #formulaire;
     #router;
+	#msgExerciceSuppprime;
 
     //Permet d'accéder à l'instance de la classe de n'importe où dans le code en utilisant App.instance
     static get instance() {
@@ -64,20 +65,59 @@ class App {
     //récupérer une tâche selon son ID
     async #recupereUn(idExercice){
 		const reponse = await fetch(`http://js-tp2:8080/backend/exercice/lireUn.php?id=${idExercice}`);
-        const exercice = await reponse.json();
 
-		const exerciceInfos = exercice[0];
+		try {
 
-        console.log(exerciceInfos);
-		const {id, type, duree, description, date, difficulte} = exerciceInfos;
-		
-        //TODO: rediriger si id n'existe plus
-		this.#detailsExerciceHTML.querySelector("[data-type]"). textContent = type.charAt(0).toUpperCase() + type.slice(1);
-		this.#detailsExerciceHTML.querySelector("[data-duree]"). textContent = duree;
-		this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;
-		this.#detailsExerciceHTML.querySelector("[data-description]"). textContent = description;
-		this.#detailsExerciceHTML.querySelector("[data-difficulte]"). textContent = difficulte;
-        this.#detailsExerciceHTML.id = idExercice;
+			if (reponse.ok == false){
+				const erreur = await reponse.json();
+				throw Error (erreur.message, {cause:"database"}); //src: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause
+
+			} else {
+
+				const exercice = await reponse.json();
+				const exerciceInfos = exercice[0];
+
+				//afficher message d'erreur et rediriger si l'exercice n'existe plus
+				if (exerciceInfos == undefined) {
+
+					const msg = "L'exercice a été supprimé";
+					throw Error (msg, {cause:"supprime"});
+
+				} else {
+
+					const {id, type, duree, description, date, difficulte} = exerciceInfos;
+
+					this.#detailsExerciceHTML.classList.remove("invisible");
+
+					this.#detailsExerciceHTML.querySelector("[data-type]"). textContent = type.charAt(0).toUpperCase() + type.slice(1);
+					this.#detailsExerciceHTML.querySelector("[data-duree]"). textContent = duree;
+					this.#detailsExerciceHTML.querySelector("[data-date]"). textContent = date;
+					this.#detailsExerciceHTML.querySelector("[data-description]"). textContent = description;
+					this.#detailsExerciceHTML.querySelector("[data-difficulte]"). textContent = difficulte;
+					this.#detailsExerciceHTML.id = idExercice;
+	
+				}
+
+			}
+
+		} catch(error) {
+
+			console.log(error.cause);
+
+			//afficher le message selon la cause de l'erreur
+			if (error.cause == "database"){
+				this.#afficherErreur("Une erreur est survenue");
+				console.warn(error.message);
+			} else {
+				this.#afficherErreur(error.message);
+			}
+
+			setTimeout(() => {
+				history.pushState({}, "", "/afficher");
+				Router.instance.redirection();
+			}, 2400);
+
+		}
 
     }
 
@@ -142,6 +182,10 @@ class App {
         this.#panneauFormulaire.classList.remove("invisible");
 
     }
+
+	#afficherErreur(message) {
+		new ToastModale(message);
+	}
 }
 
 export default App;
