@@ -54,7 +54,7 @@
 		
 		<section data-panneau="formulaire">
 			<h2>Ajouter un exercice</h2>
-			<form action="">
+			<form action="" novalidate>
 				<div class="input-group">
 					<div class="input">
 						<label for="type">Type</label>
@@ -69,7 +69,7 @@
 						<label for="date">Date</label>
 						<input type="datetime-local" min="2024-01-01T00:00" max="2030-12-31T23:59" name="date" id="date" required />
 					</div>
-					<p class=""></p>
+					<p class="invisible">Ce champ est requis. Veuillez entrer une date valide</p>
 				</div>
 				
 				<div class="input-group">

@@ -87,6 +87,7 @@ input[type="submit"] {
 /*champ date
 src: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local#technical_summary
 */
+/*
 .input-group > div:has( input:invalid) + p::after{
 	content: "Ce champ est requis. Veuillez entrer une date valide";
 	margin-top: 0.5rem;
@@ -97,4 +98,4 @@ src: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-lo
 
 .input-group > div:has( input:valid) + p::after{
 	content: "";
-}
+} */

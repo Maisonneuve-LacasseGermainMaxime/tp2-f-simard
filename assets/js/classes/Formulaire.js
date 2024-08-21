@@ -8,12 +8,11 @@ class Formulaire {
 
     constructor(){
         this.#formulaireHTML = document.querySelector("[data-panneau='formulaire'] form");
-		this.#champsHTML = this.#formulaireHTML.querySelectorAll("input:not([type='submit'], [type='datetime-local']), textarea");
-		console.log(this.#champsHTML);
+		this.#champsHTML = this.#formulaireHTML.querySelectorAll("input:not([type='submit']), textarea");
 		
 		this.#formulaireHTML.addEventListener("submit", this.#onSubmit.bind(this));
 		this.#champsHTML.forEach(function(champ){
-				champ.addEventListener("change", this.#onChangementChamp.bind(this))
+				champ.addEventListener("blur", this.#onChangementChamp.bind(this))
 			}.bind(this)
 		);
 
@@ -90,11 +89,14 @@ class Formulaire {
 				estValide = champ.value.trim().length >= 1;
 			}
 
-			const messageErreur = champ.closest(".input-group").querySelector("p")
+			const messageErreur = champ.closest(".input-group").querySelector("p");
 
 			if (estValide) {
 				messageErreur.classList.add("invisible");
 				return true;
+			} else if ( champ.type == 'datetime-local')	{
+				messageErreur.classList.remove('invisible');
+				return false;
 			} else if ( champ.value.length == 0 ) {
 				messageErreur.classList.add("invisible");
 				return false;
@@ -104,9 +106,6 @@ class Formulaire {
 				return false;
 			}
 		}
-
-		//TODO: validation champ date
-
 
 	}
 

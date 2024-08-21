@@ -104,8 +104,6 @@ class App {
 
 		} catch(error) {
 
-			console.log(error.cause);
-
 			//afficher le message selon la cause de l'erreur
 			if (error.cause == "database"){
 				this.#afficherToastErreur("Une erreur est survenue");
@@ -128,12 +126,10 @@ class App {
         const idExercice = evenement.target.closest("[data-exercice-infos]").id;
 
         const reponse = await fetch(`http://js-tp2:8080/backend/exercice/supprimerUn.php?id=${idExercice}`);
-        console.log(reponse);
 
         try{
             const message = await reponse.json();
-            console.log(message);
-
+			
             if(reponse.ok === false) {
                 throw new Error (message.message);
             }
