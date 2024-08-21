@@ -4,7 +4,7 @@
 ## Installation
 * Créer une base de donnée nommée : fitness-app
 * Rouler le script inclus dans le dossier pour créer et populer les tables (exercices.sql)
-* Placer les dossiers et fichiers de l'application directement dans la racine du dossier de contenu du serveur (htdoc ou wwww)
+* Placer les dossiers et fichiers de l'application directement dans la racine du dossier de contenu du serveur (htdoc ou wwww) ou rediriger le dossier source du serveur ou utiliser les alias dans WAMP
 * Changer le port, user et password des fichiers backend afin de concorder avec ceux de la base de donner utilisée
 * Changer le nom et le port du serveur dans les fichiers suivants:
 	* assets/classes/App.js:55
